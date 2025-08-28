@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartWheelers - Coming Soon</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for gradients and fonts */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to right top, #0d1a2f, #1a2a4b, #2b3b68, #3e4c85, #515da3);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e2e8f0; /* Light gray text */
+        }
+        .countdown-segment {
+            background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white */
+            -webkit-backdrop-filter: blur(5px); /* Frosted glass effect */
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+        }
+    </style>
+</head>
+<body class="p-4">
+    <div class="max-w-4xl w-full mx-auto p-8 bg-gray-800 bg-opacity-70 rounded-2xl shadow-xl text-center space-y-8 animate-fade-in">
+        <!-- App Name -->
+        <h1 class="text-6xl font-extrabold text-blue-400 leading-tight">
+            SmartWheelers
+        </h1>
+
+        <!-- Coming Soon Message -->
+        <p class="text-3xl font-light text-gray-300 mt-4">
+            Get ready to experience the future of diecast car collecting.
+        </p>
+        <p class="text-xl font-medium text-gray-400 mt-2">
+            Built by diecast car collectors for diecast car collectors
+        </p>
+        <p class="text-5xl font-bold text-teal-400 mt-2">
+            Coming Soon!
+        </p>
+
+        <!-- Countdown Timer Section -->
+        <div class="flex flex-wrap justify-center gap-6 mt-8">
+            <div class="countdown-segment p-6 rounded-2xl shadow-lg flex flex-col items-center min-w-[120px]">
+                <span id="days" class="text-6xl font-bold text-white">00</span>
+                <span class="text-sm font-semibold text-gray-300 uppercase mt-2">Days</span>
+            </div>
+            <div class="countdown-segment p-6 rounded-2xl shadow-lg flex flex-col items-center min-w-[120px]">
+                <span id="hours" class="text-6xl font-bold text-white">00</span>
+                <span class="text-sm font-semibold text-gray-300 uppercase mt-2">Hours</span>
+            </div>
+            <div class="countdown-segment p-6 rounded-2xl shadow-lg flex flex-col items-center min-w-[120px]">
+                <span id="minutes" class="text-6xl font-bold text-white">00</span>
+                <span class="text-sm font-semibold text-gray-300 uppercase mt-2">Minutes</span>
+            </div>
+            <div class="countdown-segment p-6 rounded-2xl shadow-lg flex flex-col items-center min-w-[120px]">
+                <span id="seconds" class="text-6xl font-bold text-white">00</span>
+                <span class="text-sm font-semibold text-gray-300 uppercase mt-2">Seconds</span>
+            </div>
+        </div>
+
+        <!-- Contact Us -->
+        <div class="mt-10 text-gray-400 text-lg">
+            <p class="text-xl font-semibold text-white mb-6">Be the first to know when we launch!</p>
+            
+            <div class="max-w-md mx-auto">
+                <p class="text-lg text-gray-300 mb-4">Contact us to get notified:</p>
+                <a 
+                    href="contact.html"
+                    class="inline-flex items-center px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 text-decoration-none"
+                >
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    Contact Us
+                </a>
+                <p class="text-sm text-gray-500 mt-3">Fill out our contact form</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-gray-500 text-sm">
+            &copy; <span id="currentYear"></span> SmartWheelers. All rights reserved.
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript for the countdown timer and current year
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set the launch date (e.g., January 1, 2026)
+            // You can change this date to any future date for your app launch
+            const launchDate = new Date('September 19, 2025 00:00:00').getTime();
+
+            // Update the countdown every 1 second
+            const countdownFunction = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = launchDate - now;
+
+                // Calculate time units
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the results in the respective elements
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+
+                // If the countdown is finished, display a message
+                if (distance < 0) {
+                    clearInterval(countdownFunction);
+                    document.querySelector('.countdown-container').innerHTML = '<p class="text-2xl text-white">We are LIVE!</p>';
+                    document.getElementById('days').innerText = '00';
+                    document.getElementById('hours').innerText = '00';
+                    document.getElementById('minutes').innerText = '00';
+                    document.getElementById('seconds').innerText = '00';
+                    document.querySelector('.countdown-segment').forEach(segment => segment.style.display = 'none');
+                    document.querySelector('.text-teal-400').innerText = 'Launched!';
+                }
+            }, 1000);
+
+            // Set the current year in the footer
+            document.getElementById('currentYear').innerText = new Date().getFullYear();
+
+            // No form handling needed - using mailto link
+        });
+    </script>
+</body>
+</html>
+
+
